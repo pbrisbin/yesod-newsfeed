@@ -45,11 +45,11 @@ template arg =
     <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"
         <channel
             <atom:link href=@{feedLinkSelf arg} rel="self" type=#{S8.unpack typeRss}
-            <title>        #{feedTitle arg}
-            <link>         @{feedLinkHome arg}
-            <description>  #{feedDescription arg}
+            <title>#{feedTitle arg}
+            <link>@{feedLinkHome arg}
+            <description>#{feedDescription arg}
             <lastBuildDate>#{formatRFC822 $ feedUpdated arg}
-            <language>     #{feedLanguage arg}
+            <language>#{feedLanguage arg}
 
             $forall entry <- feedEntries arg
                 ^{entryTemplate entry}
@@ -63,10 +63,10 @@ entryTemplate arg =
     [$xhamlet|
 #endif
     <item
-        <title>      #{feedEntryTitle arg}
-        <link>       @{feedEntryLink arg}
-        <guid>       @{feedEntryLink arg}
-        <pubDate>    #{formatRFC822 $ feedEntryUpdated arg}
+        <title>#{feedEntryTitle arg}
+        <link>@{feedEntryLink arg}
+        <guid>@{feedEntryLink arg}
+        <pubDate>#{formatRFC822 $ feedEntryUpdated arg}
         <description>#{feedEntryContent arg}
     |]
 
