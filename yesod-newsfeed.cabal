@@ -5,6 +5,7 @@ license-file:    LICENSE
 author:          Michael Snoyman, Patrick Brisbin
 maintainer:      Patrick Brisbin <pbrisbin@gmail.com>
 synopsis:        Helper functions and data types for producing News feeds.
+Description:     Helper functions and data types for producing News feeds.
 category:        Web, Yesod
 stability:       Stable
 cabal-version:   >= 1.6
