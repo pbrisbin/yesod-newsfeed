@@ -3,7 +3,7 @@ version:         0.0.0.1
 license:         BSD3
 license-file:    LICENSE
 author:          Michael Snoyman, Patrick Brisbin
-maintainer:      Michael Snoyman <michael@snoyman.com>
+maintainer:      Patrick Brisbin <pbrisbin@gmail.com>
 synopsis:        Helper functions and data types for producing News feeds.
 category:        Web, Yesod
 stability:       Stable
@@ -25,4 +25,4 @@ library
 
 source-repository head
   type:     git
-  location: git://github.com/snoyberg/yesod-newsfeed.git
+  location: git://github.com/pbrisbin/yesod-newsfeed.git
