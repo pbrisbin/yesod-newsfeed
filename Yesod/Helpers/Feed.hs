@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
---
+-- |
 -- Module        : Yesod.Helpers.Feed
 -- Copyright     : Patrick Brisbin
 -- License       : as-is
@@ -8,8 +8,8 @@
 -- Stability     : Stable
 -- Portability   : Portable
 --
--- Generic Feed and Feed Entry data types that can be used as either an
--- Rss feed or an Atom feed (or both, or other).
+-- A generic feed that will reply with either Atom or Rss depending on 
+-- what's requested.
 --
 -- Atom spec: <http://en.wikipedia.org/wiki/Atom_(standard)>
 -- Rss spec:  <http://www.rssboard.org/rss-specification>
@@ -27,12 +27,15 @@ import Yesod.Helpers.RssFeed
 import Yesod.Content (HasReps (chooseRep), typeAtom, typeRss)
 import Yesod.Handler (Route, GGHandler)
 
+-- | The Rss\/Atom content type
 data RepAtomRss = RepAtomRss RepAtom RepRss
 instance HasReps RepAtomRss where
     chooseRep (RepAtomRss (RepAtom a) (RepRss r)) = chooseRep
         [ (typeAtom, a)
         , (typeRss, r)
         ]
+
+-- | The feed itself
 newsFeed :: Monad mo => Feed (Route master) -> GGHandler sub master mo RepAtomRss
 newsFeed f = do
     a <- atomFeed f

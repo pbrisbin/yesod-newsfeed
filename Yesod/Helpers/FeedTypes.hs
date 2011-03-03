@@ -1,3 +1,4 @@
+-- | Base data types used in other modules
 module Yesod.Helpers.FeedTypes
     ( Feed (..)
     , FeedEntry (..)
@@ -6,12 +7,11 @@ module Yesod.Helpers.FeedTypes
 import Text.Hamlet      (Html)
 import Data.Time.Clock  (UTCTime)
 
--- | The overal feed
+-- | The overall feed
 data Feed url = Feed
     { feedTitle       :: String
     , feedLinkSelf    :: url
     , feedLinkHome    :: url
-
 
     -- | note: currently only used for Rss
     , feedDescription :: Html

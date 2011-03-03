@@ -1,7 +1,7 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE CPP #-}
 -------------------------------------------------------------------------------
---
+-- |
 -- Module        : Yesod.Helpers.RssFeed
 -- Copyright     : Patrick Brisbin
 -- License       : as-is
@@ -9,6 +9,10 @@
 -- Maintainer    : Patrick Brisbin <me@pbrisbin.com>
 -- Stability     : Stable
 -- Portability   : Portable
+--
+-- An Rss news feed.
+--
+-- Rss spec:  <http://www.rssboard.org/rss-specification>
 --
 -------------------------------------------------------------------------------
 module Yesod.Helpers.RssFeed
@@ -26,11 +30,12 @@ import Text.Hamlet (Hamlet, xhamlet, hamlet)
 import qualified Data.ByteString.Char8 as S8
 import Control.Monad (liftM)
 
+-- | The Rss content type
 newtype RepRss = RepRss Content
 instance HasReps RepRss where
     chooseRep (RepRss c) _ = return (typeRss, c)
 
--- | Generate the feed
+-- | The feed response itself
 rssFeed :: Monad mo => Feed (Route master) -> GGHandler sub master mo RepRss
 rssFeed = liftM RepRss . hamletToContent . template
 
@@ -41,7 +46,7 @@ template arg =
 #else
     [$xhamlet|
 #endif
-    \<?xml version="1.0" encoding="utf-8"?> 
+    \<?xml version="1.0" encoding="utf-8"?>
     <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"
         <channel
             <atom:link href=@{feedLinkSelf arg} rel="self" type=#{S8.unpack typeRss}

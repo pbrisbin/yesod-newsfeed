@@ -1,7 +1,7 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE CPP #-}
 ---------------------------------------------------------
---
+-- |
 -- Module        : Yesod.Helpers.AtomFeed
 -- Copyright     : Michael Snoyman
 -- License       : BSD3
@@ -10,11 +10,12 @@
 -- Stability     : Stable
 -- Portability   : portable
 --
--- Generating atom news feeds.
+-- An Atom news feed.
+--
+-- Atom spec: <http://en.wikipedia.org/wiki/Atom_(standard)>
 --
 ---------------------------------------------------------
 
--- | Generation of Atom newsfeeds.
 module Yesod.Helpers.AtomFeed
     ( atomFeed
     , atomLink
@@ -30,10 +31,12 @@ import Text.Hamlet (Hamlet, xhamlet, hamlet, cdata)
 import qualified Data.ByteString.Char8 as S8
 import Control.Monad (liftM)
 
+-- | The Atom content type
 newtype RepAtom = RepAtom Content
 instance HasReps RepAtom where
     chooseRep (RepAtom c) _ = return (typeAtom, c)
 
+-- | The feed response itself
 atomFeed :: Monad mo => Feed (Route master) -> GGHandler sub master mo RepAtom
 atomFeed = liftM RepAtom . hamletToContent . template
 
